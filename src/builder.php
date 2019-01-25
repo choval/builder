@@ -834,7 +834,7 @@ class builder {
    *   // This is also the reason this function is protected and not public.
    *   
    */
-  protected static function buildFilter(array $filter, array &$values=[], string $connector='AND', int $depth=1) : string {
+  public static function buildFilter(array $filter, array &$values=[], string $connector='AND', int $depth=1) : string {
     $raws = [];
     foreach($filter as $k=>$v) {
       if($k=='OR' || $k=='AND') {
