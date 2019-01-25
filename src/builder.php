@@ -896,7 +896,7 @@ class builder {
    * Takes an SQL and replaces the params for the values order
    *
    */
-  static function replaceFilterParams(string $sql, string &$values) : string {
+  static function replaceFilterParams(string $sql, array &$values) : string {
     $finalValues = [];
     foreach($values as $k=>$v) {
       if(strpos($k, $sql)) {
