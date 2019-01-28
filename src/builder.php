@@ -866,8 +866,9 @@ class builder {
                 $values[$subk] = current($v);
                 break;
               case 'IS':
-                if($v == 'NULL' || $v == 'NOT NULL') {
-                  $raws[] = " `$k` $oper $v ";
+                $subv = $v['IS'];
+                if($subv == 'NULL' || $subv == 'NOT NULL') {
+                  $raws[] = " `$k` $oper $subv ";
                 }
                 break;
               default:
@@ -896,7 +897,6 @@ class builder {
    *
    */
   static function replaceFilterParams(string $sql, array &$values) : string {
-    // This doesnt really work
     $finalValues = [];
     foreach($values as $k=>$v) {
       if(strpos($k, $sql)) {
