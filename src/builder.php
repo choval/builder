@@ -872,7 +872,7 @@ class builder {
                 }
                 break;
               case 'LIKE':
-                $subk = ':'.$k.'_'.$depth.'_'.$pos;
+                $subk = ':'.$k.'_'.$depth;
                 $subv = $v['LIKE'];
                 $values[$subk] = $subv;
                 $raws[] = " `$k` $oper $subk ";
