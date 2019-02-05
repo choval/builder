@@ -840,8 +840,13 @@ class builder {
       if($k=='OR' || $k=='AND') {
         $raws[] = static::buildFilter($v, $values, $k, ($depth+1));
       } else {
+        $subk = ':'.$k.'_'.$depth;
+        if(strpos($k,'.')) {
+          $kParts = explode('.', $k, 2);
+          $k = implode('`.`', $kParts);
+        }
         if(is_array($v)) {
-          if( $k == 'IN' || (is_array($v) && key($v)===0) ) {
+          if( (is_array($v) && key($v)===0) ) {
             $raw = " `$k` IN (";
             $vars = [];
             foreach($v as $pos=>$subv) {
@@ -854,7 +859,6 @@ class builder {
             $raws[] = $raw;
           } else if(count($v) == 1) {
             $oper = key($v);
-            $subk = ':'.$k.'_'.$depth;
             switch($oper) {
               case '!=':
               case '<>':
@@ -872,7 +876,6 @@ class builder {
                 }
                 break;
               case 'LIKE':
-                $subk = ':'.$k.'_'.$depth;
                 $subv = $v['LIKE'];
                 $values[$subk] = $subv;
                 $raws[] = " `$k` $oper $subk ";
