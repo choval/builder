@@ -872,8 +872,10 @@ class builder {
                 }
                 break;
               case 'LIKE':
+                $subk = ':'.$k.'_'.$depth.'_'.$pos;
                 $subv = $v['LIKE'];
-                $raws[] = " `$k` $oper $subv ";
+                $values[$subk] = $subv;
+                $raws[] = " `$k` $oper $subk ";
                 break;
               default:
                 $raws[] = static::buildFilter($v, $values);
