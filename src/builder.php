@@ -891,6 +891,9 @@ class builder {
         }
       }
     }
+    if(empty($raws)) {
+      return '';
+    }
     return ' ( '.implode(' '.$connector.' ', $raws).' ) ';
   }
 
